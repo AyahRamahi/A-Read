@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+    <head>
+        <title>Sign up Page</title>
+    </head>
+    <body>
+        <form action="{{ url_for('signup') }}" method="POST">
+            <input type="text" name="username">
+            <input type="text" name="password">
+            <button>Sign up</button>
+            {% if error %}
+                <h3>Username is already Taken!</h3>
+            {% endif %}
+        </form>
+    </body>
+</html>

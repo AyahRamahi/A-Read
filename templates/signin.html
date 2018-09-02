@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+    <head>
+        <title>Sign in Page</title>
+    </head>
+    <body>
+        <form action="{{ url_for('signin') }}" method="POST">
+            <input type="text" name="username">
+            <input type="text" name="password">
+            <button>Sign in</button>
+            {% if error %}
+                <h3>Username or password are wrong</h3>
+            {% endif %}
+        </form>
+    </body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+    <head>
+        <title>Main Page</title>
+    </head>
+    <body>
+        <form action="{{ url_for('main') }}" method="POST">
+            <input type="text" name="search">
+            <button>Search</button>
+        </form>
+        {% if not result and search %}
+            <h3>Found no results!</h3>
+        {% endif %}
+        <ul>
+            {% for book in result %}
+                <!-- book.1 could be book[1] or book.isbn , different methods same result -->
+                <li><a href="{{ url_for('book',isbn=book.1) }}">{{ book.1 +' , '+book.2 +' , '+book.3 +' , '+book.4 }}</a></li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
