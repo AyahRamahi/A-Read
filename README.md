@@ -1,3 +1,3 @@
-# Project 1
+# A-Read
 
-Web Programming with Python and JavaScript
+A book review web application made with Flask
