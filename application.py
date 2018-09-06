@@ -39,7 +39,7 @@ def main():
         return redirect(url_for("index"))
     else :
         if request.method == "GET":
-            return render_template("main.html",search=False)
+            return render_template("main.html")
         elif request.method == "POST":
             search = request.form['search']
             search = search.capitalize()
@@ -51,7 +51,7 @@ def main():
                 (year LIKE '%' || :search || '%')
             """
             result = db.execute(f"({instr})",{'search':search}).fetchall()
-            return render_template("main.html",result=result,search=True)
+            return render_template("result.html",result=result)
 
 
 @app.route("/signin",methods=["POST","GET"])
@@ -122,7 +122,8 @@ def book(isbn):
         if avg_rate is None:
             avg_rate = 0
         avg_rate = avg_rate.scalar()
-        avg_rate = round(avg_rate,2)
+        if avg_rate is not None:
+            avg_rate = round(avg_rate,2)
         return render_template("book.html",avg_rate=avg_rate,book=b,reviewd=reviewd,reviews=reviews,user_id=session['user_id'])
     elif request.method == "POST" :
         # add a review
