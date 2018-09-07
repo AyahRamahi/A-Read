@@ -12,11 +12,20 @@
             .result {
                 padding-left: 60px;
             }
-            h3,ul {
-                padding-left: 10%;
+            ul {
+                margin-left:10%;
             }
             h3 {
+                text-align: center;
+                margin-bottom: 30px;
                 margin-top:10px;
+            }
+            ul li {
+                text-align: center;
+                display: inline-block;
+                border:1px solid;
+                border-radius: 5px;
+                margin:5px;
             }
         </style>
     </head>
@@ -25,14 +34,23 @@
             <h3>Found no results!</h3>
         {% endif %}
         {% if result %}
-            <h3>Results:</h3>
+            <h3>Results</h3>
         {% endif %}
+        
         <ul>
+            <div class="row">
             {% for book in result %}
                 <!-- book.1 could be book[1] or book.isbn , different methods same result -->
-                <li><a href="{{ url_for('book',isbn=book.1) }}">{{ book.1 +' , '+book.2 +' , '+book.3 +' , '+book.4 }}</a></li>
+                    <li class="col-lg-5"><a href="{{ url_for('book',isbn=book.1) }}">
+                        <h4>{{ book.2 }}</h4>
+                        <h6>{{ book.1 }}</h6>
+                        <h6>{{ book.3 }}</h6>
+                        <h6>{{ book.4 }}</h6>
+                    </a></li>
             {% endfor %}
+            </div>
         </ul>
+        
         <!-- Bootstrap -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

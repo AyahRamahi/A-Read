@@ -1,31 +1,73 @@
 <!DOCTYPE html>
     <head>
-        <title>{{ book }}</title>
+        <title>{{ book.2 }}</title>
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <style>
+            .book {
+                text-align: center;
+                margin-top:10px;
+            }
+            .content {
+                margin-left:5%;
+            }
+            ul li {
+                display: inline-block;
+                max-width: 90%;
+                border:1px solid;
+                margin: 10px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                padding-left: 10px;
+                padding-right:10px;
+                background-color: #dce3ed;
+                border-style:groove;
+                border-radius: 5px;
+            }
+            h4 {
+                padding-bottom: 10px;
+            }
+        </style>
     </head>
     <body>
-        {{ book }}
-
-        {% if not reviewd %}
-            <h3>Add a review:</h3>
-            <form action="{{ url_for('book',isbn=book.1) }}" method="POST">
-                <input type="text" name="review">
-                <input type="number" name="rate" min="1" max="5">
-                <button>Submit review</button>
-            </form>
-        {% endif %}
-
+        <div class="book">
+            <h3>{{ book.2 }}</h3>
+            <h6>{{ book.1 }}</h6>
+            <h6>{{ book.3 }}</h6>
+            <h6>{{ book.4 }}</h6>
+        </div>            
         </br>
+        <div class="content">
+            {% if not reviewd %}
+                <h4>Add a review:</h4>
+                <form action="{{ url_for('book',isbn=book.1) }}" method="POST">
+                    <div class="input-group col-lg-10">
+                        <input type="text" name="review" placeholder="Review here" class="form-control">
+                        <input type="number" name="rate" min="1" max="5" class="form-control col-lg-2" placeholder="Rate">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default">Submit review</button>
+                        </span>
+                    </div>
+                </form>
+            {% endif %}
 
-        <h3>Reviews</h3>
-        <h4>Rating: {{ avg_rate }}</h4>
-        <ul>
-            {% for r in reviews %}
-                <li>{{ r }}</li>
-                {% if user_id == r.2 %}
-                <a href="{{ url_for('del_review',isbn=book.1,review_id=r.0) }}"><i class="fas fa-trash"></i></a>
-                {% endif %}
-            {% endfor %}
-        </ul>
+            </br>
+
+            <h4>Reviews</h4>
+            <h6>Rating: {{ avg_rate }}</h6>
+            <ul>
+                {% for r in reviews %}
+                    <li>{{ r.3 }}</li>
+                    {% if user_id == r.2 %}
+                    <a href="{{ url_for('del_review',isbn=book.1,review_id=r.0) }}"><i class="fas fa-trash"></i></a>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- Bootstrap -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     </body>
 </html>
