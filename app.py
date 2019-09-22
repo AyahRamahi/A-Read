@@ -17,12 +17,11 @@ app.config["SESSION_PERMANENT"] = False
 Session(app)
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
-app.secret_key = os.urandom(24)
+
 
 from database import create_users, signin_user,signup_user,create_reviews
 
-create_users()
-create_reviews()
+
 
 @app.route("/")
 def index ():
@@ -168,3 +167,9 @@ def api_access (isbn) :
     else :
         return render_template("404.html")
     
+if __name__ == '__main__':
+	app.debug = True
+	create_users()
+    create_reviews()
+	app.secret_key = os.urandom(24)
+	app.run()
