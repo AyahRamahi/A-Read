@@ -44,9 +44,9 @@ def main():
             search = search.capitalize()
             # concatenate the %% to the string to be able to use placeholders
             instr = """
-                SELECT * FROM books WHERE (title LIKE '%' || :search || '%') 
+                SELECT * FROM books WHERE (title LIKE '%' || :search || '%')
                 OR (author LIKE '%' || :search || '%') OR
-                (ISBN LIKE '%' || :search || '%') OR 
+                (ISBN LIKE '%' || :search || '%') OR
                 (year LIKE '%' || :search || '%')
             """
             result = db.execute(f"({instr})",{'search':search}).fetchall()
@@ -74,7 +74,7 @@ def signin():
                 session['logged_in'] = True
                 session['user_id'] = check[0]
                 return redirect(url_for("main"))
-    
+
 @app.route("/signup",methods=["POST","GET"])
 def signup ():
     try :
@@ -166,10 +166,10 @@ def api_access (isbn) :
         return jsonify (ret)
     else :
         return render_template("404.html")
-    
+
 if __name__ == '__main__':
-	app.debug = True
-	create_users()
-    	create_reviews()
-	app.secret_key = os.urandom(24)
-	app.run()
+    app.debug= True
+    create_users()
+    create_reviews()
+    app.secret_key = os.urandom(24)
+    app.run()
